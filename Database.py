@@ -4,7 +4,7 @@ y=[]
 OPEN=[]
 CLOSE=[]
 Block = []
-begin,end#开始和结束
+global begin,end#开始和结束
 
 for i in range(16):
     x.append(-400 + STEP *i)
