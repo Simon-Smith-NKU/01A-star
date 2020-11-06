@@ -1,8 +1,12 @@
+from math import sqrt
+
 STEP = 50
 x=[]
 y=[]
-OPEN=[]
-CLOSE=[]
+dx = [-1, 0, 1, 1, 1, 0, -1, -1]
+dy = [-1, -1, -1, 0, 1, 1, 1, 0]
+OPEN = []
+CLOSE = []
 Block = []
 global begin,end#开始和结束
 
@@ -17,4 +21,21 @@ class Node:
         self.y = y
         self.g = cost
 
+    def cost(self,end):
+        self.h = round(10 * sqrt((self.x-end.x)**2+(self.y-end.y)**2))
+        self.f = self.g + self.h
+
+    def father(self,x):
+        self.father = x
+
+def insertOPEN(x):
+    global  OPEN
+    i=0
+    # insert queue
+    for node in OPEN:
+        if node.f < x.f:
+            i += 1
+        else:
+            break
+    OPEN.insert(i ,x)
 
