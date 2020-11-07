@@ -189,7 +189,7 @@ def find(source):
                         (not inBlock(source.x + dx[3], source.y + dy[3]) or \
                          not inBlock(source.x + dx[5], source.y + dy[5]))
             if 6 == i:
-                legal = (not inBlock(tempx, tempy)) and 、
+                legal = (not inBlock(tempx, tempy)) and \
                         (not inBlock(source.x + dx[7], source.y + dy[7]) or \
                          not inBlock(source.x + dx[5], source.y + dy[5]))
         else:
