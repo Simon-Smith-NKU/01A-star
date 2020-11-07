@@ -193,7 +193,7 @@ def find(source):
                         (not inBlock(source.x + dx[7], source.y + dy[7]) or \
                          not inBlock(source.x + dx[5], source.y + dy[5]))
         else:
-            legal = inBlock(tempx,tempy)
+            legal = not inBlock(tempx,tempy)
         if legal:
             if tempx == end.x and tempy == end.y:
                 end.father(source)
@@ -252,6 +252,7 @@ def find(source):
 
     if OPEN:
         nextnode = OPEN.pop(0)
+        #设置了0.1的搜索延迟，方便看清过程
         sleep(0.1)
         find(nextnode)
     else:
