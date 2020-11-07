@@ -16,7 +16,7 @@ def main():
 
     # 0<=x<=15,0<=y<=11
     turtle.setup(800, 600)
-    turtle.screensize(bg='white')
+    turtle.screensize(bg='black')
     turtle.tracer(0)
 
     for i in range(16):
@@ -158,6 +158,14 @@ def cost_write(input):
         cost_write(input.father)
     return
 
+def inBlock(x,y):
+    # global Block
+    result = False
+    for node in Block:
+        if x == node.x and y == node.y:
+            result = True
+    return result
+
 def find(source):
     #build_map()
     # 生成OPEN
@@ -165,11 +173,26 @@ def find(source):
         # 0<=x<=15,0<=y<=11
         tempx = source.x + dx[i]
         tempy = source.y + dy[i]
-        inBlock = False
-        for node in Block:
-            if tempx == node.x and tempy == node.y:
-                inBlock = True
-        if not inBlock:
+        # 判断不得斜穿
+        legal = True
+        if i in [0,2,4,6]:
+            if 0==i :
+                legal = (not inBlock(tempx,tempy)) and \
+                        (not inBlock(source.x + dx[7],source.y + dy[7]) or \
+                          not inBlock(source.x + dx[1],source.y + dy[1]))
+            if 2 == i:
+                legal = (not inBlock(tempx, tempy)) and \
+                        (not inBlock(source.x + dx[3], source.y + dy[3]) or \
+                         not inBlock(source.x + dx[1], source.y + dy[1]))
+            if 4 == i:
+                legal = (not inBlock(tempx, tempy)) and \
+                        (not inBlock(source.x + dx[3], source.y + dy[3]) or \
+                         not inBlock(source.x + dx[5], source.y + dy[5]))
+            if 6 == i:
+                legal = (not inBlock(tempx, tempy)) and \
+                        (not inBlock(source.x + dx[7], source.y + dy[7]) or \
+                         not inBlock(source.x + dx[5], source.y + dy[5]))
+        if legal:
             if tempx == end.x and tempy == end.y:
                 end.father(source)
                 if 0 == i % 2:
@@ -227,7 +250,7 @@ def find(source):
 
     if OPEN:
         nextnode = OPEN.pop(0)
-        # sleep(1)
+        sleep(0.1)
         find(nextnode)
     else:
         SearchEnd_notfind()

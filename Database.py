@@ -37,5 +37,5 @@ def insertOPEN(x):
             i += 1
         else:
             break
-    OPEN.insert(i ,x)
+    OPEN.insert(i, x)
 
