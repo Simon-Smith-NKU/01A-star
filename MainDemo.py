@@ -176,7 +176,7 @@ def find(source):
         # 判断不得斜穿
         legal = True
         if i in [0,2,4,6]:
-            if 0==i :
+            if 0 == i :
                 legal = (not inBlock(tempx,tempy)) and \
                         (not inBlock(source.x + dx[7],source.y + dy[7]) or \
                           not inBlock(source.x + dx[1],source.y + dy[1]))
@@ -189,9 +189,11 @@ def find(source):
                         (not inBlock(source.x + dx[3], source.y + dy[3]) or \
                          not inBlock(source.x + dx[5], source.y + dy[5]))
             if 6 == i:
-                legal = (not inBlock(tempx, tempy)) and \
+                legal = (not inBlock(tempx, tempy)) and 、
                         (not inBlock(source.x + dx[7], source.y + dy[7]) or \
                          not inBlock(source.x + dx[5], source.y + dy[5]))
+        else:
+            legal = inBlock(tempx,tempy)
         if legal:
             if tempx == end.x and tempy == end.y:
                 end.father(source)
